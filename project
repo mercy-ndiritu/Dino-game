@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>JKUAT Admission Management System</title>
+		
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+	
+			<link rel="stylesheet" href="https://admission.jkuat.ac.ke/assets/css/defaultlayout.css" />
+		
+		<link rel="stylesheet" href="https://admission.jkuat.ac.ke/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://admission.jkuat.ac.ke/assets/css/bootstrap-theme.css">
+	     <link rel="stylesheet" href="https://admission.jkuat.ac.ke/assets/css/bootstrap-theme.min.css">
+		<!-- end CSS-->
+
+		<!-- JS-->
+		<script src="https://admission.jkuat.ac.ke/assets/js/jquery.min.js"></script>
+		<script src="https://admission.jkuat.ac.ke/assets/js/bootstrap.js"></script>
+	<script src="https://admission.jkuat.ac.ke/assets/js/js/jquery.min.js"></script>
+		
+
+		
+		
+	   <link rel="stylesheet" href="https://admission.jkuat.ac.ke/assets/css/tcal.css">
+			<script src="https://admission.jkuat.ac.ke/assets/js/js/tcal.js"></script>
+		
+	<title>Home</title>
+	
+	
+	
+
+</head>
+<body>
+<div class="container-fluid">
+
+		
+
+<script language="javascript">
+String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ''); };
+
+function emailValidator(elem){
+    var emailExp = /^[\w\-\.\/\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+    if(elem.value.match(emailExp)){
+            return true;
+    }else{
+	
+  alert("The email you have put is wrong");
+	//document.register.email.focus();
+    formValid = false;
+elem.value="";
+             return false;
+    }
+}
+
+function makeUpper(val) {
+    val.value = val.value.toUpperCase().trim();
+}
+
+function makeLower(val) {
+    val.value = val.value.toLowerCase().trim();
+}
+
+function isDigitsOnly(inParam) {
+  var chkExp = /^\d+$/;
+  return (chkExp.test(inParam));
+}
+function isTextOnly(inParam) {
+ var chkExp = /^[a-z][a-z\d ]+$/i;
+  return (chkExp.test(inParam));
+}
+</script>
+	
+
+
+<nav class="navbar navbar-inverse" style=" margin-top:1px;background:#ddd;color;blue;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <img src="https://admission.jkuat.ac.ke/images/img/jkuat_logo.png" width="80px" >
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar" >
+      <ul class="nav navbar-nav">
+        <li  ><a  href="">JKUAT Attachment Management System</a></li>
+       
+      </ul> 
+	   
+      <ul class="nav navbar-nav navbar-right">
+   
+       <li class="dropdown">
+		
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+         
+            <li><a href="https://admission.jkuat.ac.ke/student/passwordform"> <span class="glyphicon glyphicon-hourglass"></span>   Change password</a></li>
+            <li><a href="https://admission.jkuat.ac.ke/student/profileform">    <span class="glyphicon glyphicon-user"></span>       Update profile</a></li>
+			                    <li><a href="https://admission.jkuat.ac.ke/student/comment"> <span class="glyphicon glyphicon-envelope"></span>     Send Comments</a></li>
+
+					<li><a href="https://admission.jkuat.ac.ke/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+          </ul>
+    
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+	<script src="https://admission.jkuat.ac.ke/assets/js/js/jquery.min.js"></script>
+	<script src="https://admission.jkuat.ac.ke/assets/js/js/jquery-1.9.0.min.js"></script>
+
+	<script src="https://admission.jkuat.ac.ke/assets/js/js/jquery-ui.min.js"></script>
+	
+
+   <script type="text/javascript">
+        
+        
+            $(document).ready(function() { 
+
+                
+                $("#pr_county").change(function(){
+                 	
+                     /*dropdown post *///
+                      $.ajax({
+			 		url:"https://admission.jkuat.ac.ke/student/populatecountybyid",
+			 		
+					 data: {countyid: $(this).val() },
+
+                    type: "POST",
+                    success:function(data){
+                        
+                        $("#pr_district").html(data);
+                    }
+                
+                    });
+
+               
+                });
+				 $("#bp_county").change(function(){
+                 	
+                     /*dropdown post *///
+                      $.ajax({
+			 		url:"https://admission.jkuat.ac.ke/student/populatecountybyid",
+			 		
+					 data: {countyid: $(this).val() },
+
+                    type: "POST",
+                    success:function(data){
+                        
+                        $("#bp_district").html(data);
+                    }
+                
+                    });
+
+               
+                });
+
+            });
+			
+			   $(function () {
+        $("#country").change(function () {
+            if ($(this).val() == "") {
+                $("#county1").hide();
+					
+            }  else if ($(this).val() !=1) {
+                $("#county1").hide();
+            } 
+            else {
+                $("#county1").show();
+            }
+        });
+    });
+               $(function () {
+        $("#pr_county").change(function () {
+            if ($(this).val() == "") {
+                $("#pr_district1").hide();
+            } 
+            else {
+                $("#pr_district1").show();
+            }
+        });
+    });
+            function displyfees(){
+			alert("PLEASE MAKE SURE YOU CHOOSE CORRECT DISTRICT!!! ");
+			
+			
+			}
+        </script>
+
+
+
+
+
+
+<script >
+function numbersonly(e){
+    var unicode=e.charCode? e.charCode : e.keyCode
+    if (unicode!=8){ //if the key isn't the backspace key (which we should allow)
+        if (unicode<48||unicode>57) //if not a number
+            return false //disable key press
+    }
+}
+</script >
+
+ <div class="row">
+
+  	<div class="col-md-3">
+  
+  <div class="panel panel-success" data-collapsed="0">
+        	<div class="panel-heading">
+            	<div class="panel-title"  id="redcolor" >
+            		<i class="entypo-plus-circled"></i>
+				 Steps
+            	</div>
+            </div>
+			<div class="panel-body">
+
+		     <div class="list-group">
+        <span href="#" class="list-group-item active">
+            Steps to be completed.
+            <span class="pull-right" id="slide-submenu">
+                <i class="fa fa-times"></i>
+            </span>
+        </span>
+        <a href="https://admission.jkuat.ac.ke/student/biodataform" class="list-group-item"> 
+	
+           <span class="glyphicon glyphicon-sort-by-attributes-alt"></span> Bio Data  <span class="badge">Step 1</span>
+        </a>
+	
+    </div>  
+ 
+ 
+ 
+ 			</div>
+		</div>
+  
+  </div>
+
+    	<div class="col-md-7">
+		<div class="panel panel-success" data-collapsed="0">
+        	<div class="panel-heading">
+            	<div class="panel-title" id="redcolor" >
+            		<i class="entypo-plus-circled"></i>
+				Bio Details
+            	</div>
+            </div>
+			<div class="panel-body">
+
+			
+										
+					<div class="row">
+						<div class="col-md-12">
+							
+							<div class="panel-body">
+					
+	
+<form action="https://admission.jkuat.ac.ke/addstudentbio" class="form-horizontal form-groups-bordered validate" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+					
+				
+
+		<div id="titleheader"> Please Enter Correct   Personal Details(Part 1)</div>
+			<br>	<br>	
+	<div class="form-group">
+    <label for="inputtitle" class="col-sm-2 control-label">Select Title</label>
+    <div class="col-sm-10">
+		
+	
+		
+			<select required class="form-control" name="title">
+		   <option selected="selected" value="Miss">Miss</option>
+	<option value="">----Select Your Title-----</option>
+				<option value="Mr">Mr</option>
+				<option value="Mrs" > Mrs </option>
+				<option value="Miss" > Miss </option>
+				
+				</select>		
+		  		
+				
+		<span class="text-danger"> 			
+		</span>
+	</div>
+  </div>
+	
+		<div class="form-group">
+    <label for="inputsurname" class="col-sm-2 control-label">	Surname</label>
+    <div class="col-sm-10">
+		
+	
+				<input type="text" readonly name="surname" value="NDIRITU" id="surname" class="form-control" required placeholder="Enter Surname">
+		  		
+				
+		<span class="text-danger"> Enter your surName here..		
+		</span>
+	</div>
+  </div>
+	<div class="form-group">
+    <label for="inputfirstname" class="col-sm-2 control-label">	First Name</label>
+    <div class="col-sm-10">
+		    <input id="id"  name="id"   placeholder="Enter id" type="hidden"  class="form-control"  value="52792" />
+
+	
+    <input id="firstname" name="firstname"   readonly placeholder="Enter Your First Name" type="text"  class="form-control"  value="MERCY WANJIKU" />
+		  		
+				
+		<span class="text-danger"> Enter (First and Second Names) here...		
+		</span>
+	</div>
+  </div>	
+
+
+
+	
+  <div class="form-group">
+    <label for="inputidno" class="col-sm-2 control-label">	Id Number</label>
+    <div class="col-sm-10">
+		
+				<input type="text" name="idno" value="39255135" id="pfnumber" class="form-control" required placeholder="Enter National id No">
+		
+		<span class="text-danger"> Enter your correct National ID Number /Passport / Birth Certificate Number 		
+		</span>
+	</div>
+  </div>
+    <input type="hidden" name="category" value="student"   id="category" class="form-field"  placeholder=" Enter category">
+
+	<div class="form-group">
+    <label for="inputboxnumber" class="col-sm-2 control-label">	P.O Box </label>
+    <div class="col-sm-10">
+		
+		  		<input type="text" name="boxnumber" value="7"id="boxnumber" class="form-control" required placeholder="P.o Box " >
+
+		  		
+				
+		<span class="text-danger"> Enter your  Box Number		
+		</span>
+	</div>
+  </div>	
+
+  	<div class="form-group">
+    <label for="inputtownname" class="col-sm-2 control-label">Town</label>
+    <div class="col-sm-10">
+		
+	
+		
+				<input type="text" name="townname" value="MWEIGA" id="townname" class="form-control" required placeholder="Enter Town Name">
+		
+		  		
+				
+		<span class="text-danger"> 	Enter  your nearest town  here..		
+		</span>
+	</div>
+  </div>	
+
+  	<div class="form-group">
+    <label for="inputtowncode" class="col-sm-2 control-label">	Town code</label>
+    <div class="col-sm-10">
+		
+		
+		<input type="text" name="towncode" onkeypress="return numbersonly(event)" value="10100"  id="towncode" class="form-control" required placeholder="Enter Code">
+				
+				
+		<span class="text-danger"> 	Enter your  town code here..		
+		</span>
+	</div>
+  </div>	
+
+  	<div class="form-group">
+    <label for="inputmobileno" class="col-sm-2 control-label">	Phone No</label>
+    <div class="col-sm-10">
+		
+
+					<input type="text" onkeypress="return numbersonly(event)" name="mobileno" value="0797919283" id="mobileno" class="form-control" required placeholder="Phone / Mobile No">
+
+		  		
+				
+		<span class="text-danger"> Enter  your  Phone No  here..		
+		</span>
+	</div>
+  </div>	
+
+  	<div class="form-group">
+    <label for="inputemail" class="col-sm-2 control-label">	 Email</label>
+    <div class="col-sm-10">
+		
+	
+	<input type="email" onchange="makeLower(this);" onBlur="emailValidator(this);"  name="email" value="esthernder14@gmail.com" id="email" class="form-control" required placeholder="Enter Email Address">
+		  		
+				
+		<span class="text-danger"> 	Enter your Personal Email here..		
+		</span>
+	</div>
+  </div>	
+
+
+  
+  
+    <div class="form-group">
+    <label for="inputothername" class="col-sm-2 control-label">	Country</label>
+    <div class="col-sm-10">
+		
+<select name="nationality" id="country"class="form-control" required>
+    	    <option value="1 ">Kenya</option>
+
+   
+    	    <option value="1 ">Kenya</option>
+
+   
+    	    <option value="2 ">Canada</option>
+
+   
+    	    <option value="3 ">Afghanistan</option>
+
+   
+    	    <option value="4 ">Albania</option>
+
+   
+    	    <option value="5 ">Algeria</option>
+
+   
+    	    <option value="6 ">American Samoa</option>
+
+   
+    	    <option value="7 ">Andorra</option>
+
+   
+    	    <option value="8 ">Angola</option>
+
+   
+    	    <option value="9 ">Anguilla</option>
+
+   
+    	    <option value="10 ">Antarctica</option>
+
+   
+    	    <option value="11 ">Antigua and/or Barbuda</option>
+
+   
+    	    <option value="12 ">Argentina</option>
+
+   
+    	    <option value="13 ">Armenia</option>
+
+   
+    	    <option value="14 ">Aruba</option>
+
+   
+    	    <option value="15 ">Australia</option>
+
+   
+    	    <option value="16 ">Austria</option>
+
+   
+    	    <option value="17 ">Azerbaijan</option>
+
+   
+    	    <option value="18 ">Bahamas</option>
+
+   
+    	    <option value="19 ">Bahrain</option>
+
+   
+    	    <option value="20 ">Bangladesh</option>
+
+   
+    	    <option value="21 ">Barbados</option>
+
+   
+    	    <option value="22 ">Belarus</option>
+
+   
+    	    <option value="23 ">Belgium</option>
+
+   
+    	    <option value="24 ">Belize</option>
+
+   
+    	    <option value="25 ">Benin</option>
+
+   
+    	    <option value="26 ">Bermuda</option>
+
+   
+    	    <option value="27 ">Bhutan</option>
+
+   
+    	    <option value="28 ">Bolivia</option>
+
+   
+    	    <option value="29 ">Bosnia and Herzegovina</option>
+
+   
+    	    <option value="30 ">Botswana</option>
+
+   
+    	    <option value="31 ">Bouvet Island</option>
+
+   
+    	    <option value="32 ">Brazil</option>
+
+   
+    	    <option value="33 ">British lndian Ocean Territory</option>
+
+   
+    	    <option value="34 ">Brunei Darussalam</option>
+
+   
+    	    <option value="35 ">Bulgaria</option>
+
+   
+    	    <option value="36 ">Burkina Faso</option>
+
+   
+    	    <option value="37 ">Burundi</option>
+
+   
+    	    <option value="38 ">Cambodia</option>
+
+   
+    	    <option value="39 ">Cameroon</option>
+
+   
+    	    <option value="40 ">Cape Verde</option>
+
+   
+    	    <option value="41 ">Cayman Islands</option>
+
+   
+    	    <option value="42 ">Central African Republic</option>
+
+   
+    	    <option value="43 ">Chad</option>
+
+   
+    	    <option value="44 ">Chile</option>
+
+   
+    	    <option value="45 ">China</option>
+
+   
+    	    <option value="46 ">Christmas Island</option>
+
+   
+    	    <option value="47 ">Cocos (Keeling) Islands</option>
+
+   
+    	    <option value="48 ">Colombia</option>
+
+   
+    	    <option value="49 ">Comoros</option>
+
+   
+    	    <option value="50 ">Congo</option>
+
+   
+    	    <option value="51 ">Cook Islands</option>
+
+   
+    	    <option value="52 ">Costa Rica</option>
+
+   
+    	    <option value="53 ">Croatia (Hrvatska)</option>
+
+   
+    	    <option value="54 ">Cuba</option>
+
+   
+    	    <option value="55 ">Cyprus</option>
+
+   
+    	    <option value="56 ">Czech Republic</option>
+
+   
+    	    <option value="57 ">Denmark</option>
+
+   
+    	    <option value="58 ">Djibouti</option>
+
+   
+    	    <option value="59 ">Dominica</option>
+
+   
+    	    <option value="60 ">Dominican Republic</option>
+
+   
+    	    <option value="61 ">East Timor</option>
+
+   
+    	    <option value="62 ">Ecuador</option>
+
+   
+    	    <option value="63 ">Egypt</option>
+
+   
+    	    <option value="64 ">El Salvador</option>
+
+   
+    	    <option value="65 ">Equatorial Guinea</option>
+
+   
+    	    <option value="66 ">Eritrea</option>
+
+   
+    	    <option value="67 ">Estonia</option>
+
+   
+    	    <option value="68 ">Ethiopia</option>
+
+   
+    	    <option value="69 ">Falkland Islands (Malvinas)</option>
+
+   
+    	    <option value="70 ">Faroe Islands</option>
+
+   
+    	    <option value="71 ">Fiji</option>
+
+   
+    	    <option value="72 ">Finland</option>
+
+   
+    	    <option value="73 ">France</option>
+
+   
+    	    <option value="74 ">France, Metropolitan</option>
+
+   
+    	    <option value="75 ">French Guiana</option>
+
+   
+    	    <option value="76 ">French Polynesia</option>
+
+   
+    	    <option value="77 ">French Southern Territories</option>
+
+   
+    	    <option value="78 ">Gabon</option>
+
+   
+    	    <option value="79 ">Gambia</option>
+
+   
+    	    <option value="80 ">Georgia</option>
+
+   
+    	    <option value="81 ">Germany</option>
+
+   
+    	    <option value="82 ">Ghana</option>
+
+   
+    	    <option value="83 ">Gibraltar</option>
+
+   
+    	    <option value="84 ">Greece</option>
+
+   
+    	    <option value="85 ">Greenland</option>
+
+   
+    	    <option value="86 ">Grenada</option>
+
+   
+    	    <option value="87 ">Guadeloupe</option>
+
+   
+    	    <option value="88 ">Guam</option>
+
+   
+    	    <option value="89 ">Guatemala</option>
+
+   
+    	    <option value="90 ">Guinea</option>
+
+   
+    	    <option value="91 ">Guinea-Bissau</option>
+
+   
+    	    <option value="92 ">Guyana</option>
+
+   
+    	    <option value="93 ">Haiti</option>
+
+   
+    	    <option value="94 ">Heard and Mc Donald Islands</option>
+
+   
+    	    <option value="95 ">Honduras</option>
+
+   
+    	    <option value="96 ">Hong Kong</option>
+
+   
+    	    <option value="97 ">Hungary</option>
+
+   
+    	    <option value="98 ">Iceland</option>
+
+   
+    	    <option value="99 ">India</option>
+
+   
+    	    <option value="100 ">Indonesia</option>
+
+   
+    	    <option value="101 ">Iran (Islamic Republic of)</option>
+
+   
+    	    <option value="102 ">Iraq</option>
+
+   
+    	    <option value="103 ">Ireland</option>
+
+   
+    	    <option value="104 ">Israel</option>
+
+   
+    	    <option value="105 ">Italy</option>
+
+   
+    	    <option value="106 ">Ivory Coast</option>
+
+   
+    	    <option value="107 ">Jamaica</option>
+
+   
+    	    <option value="108 ">Japan</option>
+
+   
+    	    <option value="109 ">Jordan</option>
+
+   
+    	    <option value="110 ">Kazakhstan</option>
+
+   
+    	    <option value="111 ">United States </option>
+
+   
+    	    <option value="112 ">Kiribati</option>
+
+   
+    	    <option value="113 ">Korea, Democratic People's Republic of</option>
+
+   
+    	    <option value="114 ">Korea, Republic of</option>
+
+   
+    	    <option value="115 ">Kosovo</option>
+
+   
+    	    <option value="116 ">Kuwait</option>
+
+   
+    	    <option value="117 ">Kyrgyzstan</option>
+
+   
+    	    <option value="118 ">Lao People's Democratic Republic</option>
+
+   
+    	    <option value="119 ">Latvia</option>
+
+   
+    	    <option value="120 ">Lebanon</option>
+
+   
+    	    <option value="121 ">Lesotho</option>
+
+   
+    	    <option value="122 ">Liberia</option>
+
+   
+    	    <option value="123 ">Libyan Arab Jamahiriya</option>
+
+   
+    	    <option value="124 ">Liechtenstein</option>
+
+   
+    	    <option value="125 ">Lithuania</option>
+
+   
+    	    <option value="126 ">Luxembourg</option>
+
+   
+    	    <option value="127 ">Macau</option>
+
+   
+    	    <option value="128 ">Macedonia</option>
+
+   
+    	    <option value="129 ">Madagascar</option>
+
+   
+    	    <option value="130 ">Malawi</option>
+
+   
+    	    <option value="131 ">Malaysia</option>
+
+   
+    	    <option value="132 ">Maldives</option>
+
+   
+    	    <option value="133 ">Mali</option>
+
+   
+    	    <option value="134 ">Malta</option>
+
+   
+    	    <option value="135 ">Marshall Islands</option>
+
+   
+    	    <option value="136 ">Martinique</option>
+
+   
+    	    <option value="137 ">Mauritania</option>
+
+   
+    	    <option value="138 ">Mauritius</option>
+
+   
+    	    <option value="139 ">Mayotte</option>
+
+   
+    	    <option value="140 ">Mexico</option>
+
+   
+    	    <option value="141 ">Micronesia, Federated States of</option>
+
+   
+    	    <option value="142 ">Moldova, Republic of</option>
+
+   
+    	    <option value="143 ">Monaco</option>
+
+   
+    	    <option value="144 ">Mongolia</option>
+
+   
+    	    <option value="145 ">Montenegro</option>
+
+   
+    	    <option value="146 ">Montserrat</option>
+
+   
+    	    <option value="147 ">Morocco</option>
+
+   
+    	    <option value="148 ">Mozambique</option>
+
+   
+    	    <option value="149 ">Myanmar</option>
+
+   
+    	    <option value="150 ">Namibia</option>
+
+   
+    	    <option value="151 ">Nauru</option>
+
+   
+    	    <option value="152 ">Nepal</option>
+
+   
+    	    <option value="153 ">Netherlands</option>
+
+   
+    	    <option value="154 ">Netherlands Antilles</option>
+
+   
+    	    <option value="155 ">New Caledonia</option>
+
+   
+    	    <option value="156 ">New Zealand</option>
+
+   
+    	    <option value="157 ">Nicaragua</option>
+
+   
+    	    <option value="158 ">Niger</option>
+
+   
+    	    <option value="159 ">Nigeria</option>
+
+   
+    	    <option value="160 ">Niue</option>
+
+   
+    	    <option value="161 ">Norfork Island</option>
+
+   
+    	    <option value="162 ">Northern Mariana Islands</option>
+
+   
+    	    <option value="163 ">Norway</option>
+
+   
+    	    <option value="164 ">Oman</option>
+
+   
+    	    <option value="165 ">Pakistan</option>
+
+   
+    	    <option value="166 ">Palau</option>
+
+   
+    	    <option value="167 ">Panama</option>
+
+   
+    	    <option value="168 ">Papua New Guinea</option>
+
+   
+    	    <option value="169 ">Paraguay</option>
+
+   
+    	    <option value="170 ">Peru</option>
+
+   
+    	    <option value="171 ">Philippines</option>
+
+   
+    	    <option value="172 ">Pitcairn</option>
+
+   
+    	    <option value="173 ">Poland</option>
+
+   
+    	    <option value="174 ">Portugal</option>
+
+   
+    	    <option value="175 ">Puerto Rico</option>
+
+   
+    	    <option value="176 ">Qatar</option>
+
+   
+    	    <option value="177 ">Reunion</option>
+
+   
+    	    <option value="178 ">Romania</option>
+
+   
+    	    <option value="179 ">Russian Federation</option>
+
+   
+    	    <option value="180 ">Rwanda</option>
+
+   
+    	    <option value="181 ">Saint Kitts and Nevis</option>
+
+   
+    	    <option value="182 ">Saint Lucia</option>
+
+   
+    	    <option value="183 ">Saint Vincent and the Grenadines</option>
+
+   
+    	    <option value="184 ">Samoa</option>
+
+   
+    	    <option value="185 ">San Marino</option>
+
+   
+    	    <option value="186 ">Sao Tome and Principe</option>
+
+   
+    	    <option value="187 ">Saudi Arabia</option>
+
+   
+    	    <option value="188 ">Senegal</option>
+
+   
+    	    <option value="189 ">Serbia</option>
+
+   
+    	    <option value="190 ">Seychelles</option>
+
+   
+    	    <option value="191 ">Sierra Leone</option>
+
+   
+    	    <option value="192 ">Singapore</option>
+
+   
+    	    <option value="193 ">Slovakia</option>
+
+   
+    	    <option value="194 ">Slovenia</option>
+
+   
+    	    <option value="195 ">Solomon Islands</option>
+
+   
+    	    <option value="196 ">Somalia</option>
+
+   
+    	    <option value="197 ">South Africa</option>
+
+   
+    	    <option value="198 ">South Georgia South Sandwich Islands</option>
+
+   
+    	    <option value="199 ">Spain</option>
+
+   
+    	    <option value="200 ">Sri Lanka</option>
+
+   
+    	    <option value="201 ">St. Helena</option>
+
+   
+    	    <option value="202 ">St. Pierre and Miquelon</option>
+
+   
+    	    <option value="203 ">Sudan</option>
+
+   
+    	    <option value="204 ">Suriname</option>
+
+   
+    	    <option value="205 ">Svalbarn and Jan Mayen Islands</option>
+
+   
+    	    <option value="206 ">Swaziland</option>
+
+   
+    	    <option value="207 ">Sweden</option>
+
+   
+    	    <option value="208 ">Switzerland</option>
+
+   
+    	    <option value="209 ">Syrian Arab Republic</option>
+
+   
+    	    <option value="210 ">Taiwan</option>
+
+   
+    	    <option value="211 ">Tajikistan</option>
+
+   
+    	    <option value="212 ">Tanzania, United Republic of</option>
+
+   
+    	    <option value="213 ">Thailand</option>
+
+   
+    	    <option value="214 ">Togo</option>
+
+   
+    	    <option value="215 ">Tokelau</option>
+
+   
+    	    <option value="216 ">Tonga</option>
+
+   
+    	    <option value="217 ">Trinidad and Tobago</option>
+
+   
+    	    <option value="218 ">Tunisia</option>
+
+   
+    	    <option value="219 ">Turkey</option>
+
+   
+    	    <option value="220 ">Turkmenistan</option>
+
+   
+    	    <option value="221 ">Turks and Caicos Islands</option>
+
+   
+    	    <option value="222 ">Tuvalu</option>
+
+   
+    	    <option value="223 ">Uganda</option>
+
+   
+    	    <option value="224 ">Ukraine</option>
+
+   
+    	    <option value="225 ">United Arab Emirates</option>
+
+   
+    	    <option value="226 ">United Kingdom</option>
+
+   
+    	    <option value="227 ">United States minor outlying islands</option>
+
+   
+    	    <option value="228 ">Uruguay</option>
+
+   
+    	    <option value="229 ">Uzbekistan</option>
+
+   
+    	    <option value="230 ">Vanuatu</option>
+
+   
+    	    <option value="231 ">Vatican City State</option>
+
+   
+    	    <option value="232 ">Venezuela</option>
+
+   
+    	    <option value="233 ">Vietnam</option>
+
+   
+    	    <option value="234 ">Virigan Islands (British)</option>
+
+   
+    	    <option value="235 ">Virgin Islands (U.S.)</option>
+
+   
+    	    <option value="236 ">Wallis and Futuna Islands</option>
+
+   
+    	    <option value="237 ">Western Sahara</option>
+
+   
+    	    <option value="238 ">Yemen</option>
+
+   
+    	    <option value="239 ">Yugoslavia</option>
+
+   
+    	    <option value="240 ">Zaire</option>
+
+   
+    	    <option value="241 ">Zambia</option>
+
+   
+    	    <option value="242 ">Zimbabwe</option>
+
+   
+    	    <option value="243 ">South Sudan</option>
+
+   
+    	</select>
+		
+		
+		<span class="text-danger"> 		
+		</span>
+	</div>
+  </div>
+  
+  
+  
+  
+  
+  
+  <div class="form-group">
+    <label for="inputdob" class="col-sm-2 control-label"> 	Date of Birth </label>
+    <div class="col-sm-10">
+		
+				<input type="date" name="dob" value="2001-11-11" id="dob"    class="tcal" required placeholder="Enter date of permanent">
+	
+		<span class="text-danger"> Enter Your Date of Birth here..		
+		</span>
+	</div>
+  </div>
+  
+  
+  
+  
+
+	
+  
+  
+  
+  
+  
+  
+  
+  
+  
+     <div class="form-group">
+    <label for="inputothername" class="col-sm-2 control-label">	Religion</label>
+    <div class="col-sm-10">
+		
+<select name="religion" id="religion"class="form-control" required>
+    	    <option value="1 ">Christian</option>
+
+   
+    	    <option value="1 ">Christian</option>
+
+   
+    	    <option value="2 ">Buthist</option>
+
+   
+    	    <option value="3 ">Muslim</option>
+
+   
+    	    <option value="4 ">Protestant</option>
+
+   
+    	</select>
+		
+		
+		<span class="text-danger"> 		
+		</span>
+	</div>
+  </div>
+  
+  
+  
+  
+  
+
+  	<div class="form-group">
+    <label for="inputgender" class="col-sm-2 control-label">Gender</label>
+    <div class="col-sm-10">
+		
+	
+		
+			<select required class="form-control" name="gender">
+		   <option selected="selected" value="FEMALE">FEMALE</option>
+	<option value="">----Select Gender-----</option>
+				<option value="Male">Male</option>
+				<option value="Female" > Female </option>
+				
+				</select>		
+		  		
+				
+		<span class="text-danger"> 			
+		</span>
+	</div>
+  </div>	
+  
+ 	<div id="titleheader"> Kindly enter correct Details of your place of Birth  (Part 2)</div>	
+  	<div class="form-group">
+    <label for="inputbp_village" class="col-sm-2 control-label">	Village</label>
+    <div class="col-sm-10">
+	<input type="text" name="bp_village" value="watuka" id="bp_village" class="form-control" required placeholder="Village Name">
+		
+		<span class="text-danger"> 	Enter your Village Name (Birth place)  here..		
+		</span>
+	</div>
+  </div>	
+
+  	<div class="form-group">
+    <label for="inputbp_location" class="col-sm-2 control-label">	Location</label>
+    <div class="col-sm-10">
+
+				<input type="text" name="bp_location" value="gatarakwa" id="bp_location" class="form-control" required placeholder="Location Name">
+				
+		<span class="text-danger"> Enter  your Location Name (Birth place) here..		
+		</span>
+	</div>
+  </div>	
+  	
+</select>	<span class="text-danger"> 	Enter your Province Name (Birth place) here..		
+		</span>
+	</div>
+  </div>
+
+  <div class="form-group" id="county2">
+    <label for="inputbp_county" class="col-sm-2 control-label">	County</label>
+    <div class="col-sm-10">
+<select name="bp_county" id="bp_county"class="form-control" required>
+
+	
+	    <option  value="19 ">Nyeri</option>
+
+   
+    	    <option value="1 ">Mombasa</option>
+
+   
+    	    <option value="2 ">Kwale</option>
+
+   
+    	    <option value="3 ">Kilifi</option>
+
+   
+    	    <option value="4 ">Tana River</option>
+
+   
+    	    <option value="5 ">Lamu</option>
+
+   
+    	    <option value="6 ">Taita-Taveta</option>
+
+   
+    	    <option value="7 ">Garissa</option>
+
+   
+    	    <option value="8 ">Wajir</option>
+
+   
+    	    <option value="9 ">Mandera</option>
+
+   
+    	    <option value="10 ">Marsabit</option>
+
+   
+    	    <option value="11 ">Isiolo</option>
+
+   
+    	    <option value="12 ">Meru</option>
+
+   
+    	    <option value="13 ">Tharaka-Nithi</option>
+
+   
+    	    <option value="14 ">Embu</option>
+
+   
+    	    <option value="15 ">Kitui</option>
+
+   
+    	    <option value="16 ">Machakos</option>
+
+   
+    	    <option value="17 ">Makueni</option>
+
+   
+    	    <option value="18 ">Nyandarua</option>
+
+   
+    	    <option value="19 ">Nyeri</option>
+
+   
+    	    <option value="20 ">Kirinyaga</option>
+
+   
+    	    <option value="21 ">Murang'a</option>
+
+   
+    	    <option value="22 ">Kiambu</option>
+
+   
+    	    <option value="23 ">Turkana</option>
+
+   
+    	    <option value="24 ">West Pokot</option>
+
+   
+    	    <option value="25 ">Samburu</option>
+
+   
+    	    <option value="26 ">Trans-Nzoia</option>
+
+   
+    	    <option value="27 ">Uasin Gishu</option>
+
+   
+    	    <option value="28 ">Elgeyo-Marakwet</option>
+
+   
+    	    <option value="29 ">Nandi</option>
+
+   
+    	    <option value="30 ">Baringo</option>
+
+   
+    	    <option value="31 ">Laikipia</option>
+
+   
+    	    <option value="32 ">Nakuru</option>
+
+   
+    	    <option value="33 ">Narok</option>
+
+   
+    	    <option value="34 ">Kajiado</option>
+
+   
+    	    <option value="35 ">Kericho</option>
+
+   
+    	    <option value="36 ">Bomet</option>
+
+   
+    	    <option value="37 ">Kakamega</option>
+
+   
+    	    <option value="38 ">Vihiga</option>
+
+   
+    	    <option value="39 ">Bungoma</option>
+
+   
+    	    <option value="40 ">Busia</option>
+
+   
+    	    <option value="41 ">Siaya</option>
+
+   
+    	    <option value="42 ">Kisumu</option>
+
+   
+    	    <option value="43 ">Homa Bay</option>
+
+   
+    	    <option value="44 ">Migori</option>
+
+   
+    	    <option value="45 ">Kisii</option>
+
+   
+    	    <option value="46 ">Nyamira</option>
+
+   
+    	    <option value="47 ">Nairobi</option>
+
+   
+    	    <option value="N/A ">N/A</option>
+
+   
+    	</select>		<span class="text-danger"> 	Select your county Name (Birth place) here..		
+		</span>
+	</div>
+  </div>
+
+	
+	
+	<div class="form-group" id="bp_district1">
+    <label for="inputbp_district" class="col-sm-2 control-label"> District(Birth place)
+
+	</label>
+    <div class="col-sm-10">
+ <select name="bp_district" id="bp_district" class="form-control" required>
+ 	    <option  value="99 ">Nyeri central</option>
+
+   
+            </select> 
+
+	<span class="text-danger">Make sure you Select  Correct county.. </span>
+
+	
+
+  <div class="form-group" id="county1">
+    <label for="inputpr_county" class="col-sm-2 control-label">	County</label>
+    <div class="col-sm-10">
+<select name="pr_county" id="pr_county"class="form-control" required>
+ 
+			    <option  value="19 ">Nyeri</option>
+
+   
+    	    <option value="1 ">Mombasa</option>
+
+   
+    	    <option value="2 ">Kwale</option>
+
+   
+    	    <option value="3 ">Kilifi</option>
+
+   
+    	    <option value="4 ">Tana River</option>
+
+   
+    	    <option value="5 ">Lamu</option>
+
+   
+    	    <option value="6 ">Taita-Taveta</option>
+
+   
+    	    <option value="7 ">Garissa</option>
+
+   
+    	    <option value="8 ">Wajir</option>
+
+   
+    	    <option value="9 ">Mandera</option>
+
+   
+    	    <option value="10 ">Marsabit</option>
+
+   
+    	    <option value="11 ">Isiolo</option>
+
+   
+    	    <option value="12 ">Meru</option>
+
+   
+    	    <option value="13 ">Tharaka-Nithi</option>
+
+   
+    	    <option value="14 ">Embu</option>
+
+   
+    	    <option value="15 ">Kitui</option>
+
+   
+    	    <option value="16 ">Machakos</option>
+
+   
+    	    <option value="17 ">Makueni</option>
+
+   
+    	    <option value="18 ">Nyandarua</option>
+
+   
+    	    <option value="19 ">Nyeri</option>
+
+   
+    	    <option value="20 ">Kirinyaga</option>
+
+   
+    	    <option value="21 ">Murang'a</option>
+
+   
+    	    <option value="22 ">Kiambu</option>
+
+   
+    	    <option value="23 ">Turkana</option>
+
+   
+    	    <option value="24 ">West Pokot</option>
+
+   
+    	    <option value="25 ">Samburu</option>
+
+   
+    	    <option value="26 ">Trans-Nzoia</option>
+
+   
+    	    <option value="27 ">Uasin Gishu</option>
+
+   
+    	    <option value="28 ">Elgeyo-Marakwet</option>
+
+   
+    	    <option value="29 ">Nandi</option>
+
+   
+    	    <option value="30 ">Baringo</option>
+
+   
+    	    <option value="31 ">Laikipia</option>
+
+   
+    	    <option value="32 ">Nakuru</option>
+
+   
+    	    <option value="33 ">Narok</option>
+
+   
+    	    <option value="34 ">Kajiado</option>
+
+   
+    	    <option value="35 ">Kericho</option>
+
+   
+    	    <option value="36 ">Bomet</option>
+
+   
+    	    <option value="37 ">Kakamega</option>
+
+   
+    	    <option value="38 ">Vihiga</option>
+
+   
+    	    <option value="39 ">Bungoma</option>
+
+   
+    	    <option value="40 ">Busia</option>
+
+   
+    	    <option value="41 ">Siaya</option>
+
+   
+    	    <option value="42 ">Kisumu</option>
+
+   
+    	    <option value="43 ">Homa Bay</option>
+
+   
+    	    <option value="44 ">Migori</option>
+
+   
+    	    <option value="45 ">Kisii</option>
+
+   
+    	    <option value="46 ">Nyamira</option>
+
+   
+    	    <option value="47 ">Nairobi</option>
+
+   
+    	    <option value="N/A ">N/A</option>
+
+   
+    	</select>		<span class="text-danger"> 	Select your county Name (Birth place) here..		
+		</span>
+	</div>
+  </div>
+
+
+	<span class="text-danger">Make sure you Select  Correct county first then district.. </span>
+   </div>
+  </div>
+	 	<div id="titleheader"> Kindly enter correct  Details of Any disability..  (Part 4)</div>	
+   
+   	<div class="form-group">
+    <label for="inputimparement" class="col-sm-2 control-label">	Disabled?</label>
+    <div class="col-sm-10">
+<select class="form-control" name="imparement">
+			   <option value="No">No</option>
+				<option value="No">No</option>
+				<option value="Yes" >Yes </option>
+			
+				</select>		<span class="text-danger"> Do you have any disability ? ..		
+		</span>
+	</div>
+  </div>
+  
+  <div class="form-group">
+    <label for="inputimparementdetails" class="col-sm-2 control-label">	Description</label>
+    <div class="col-sm-10">
+<textarea name="imparementdetails"  class="form-control">
+																				</textarea>		
+		<span class="text-danger">Describe your challenge here		
+		</span>
+	</div>
+  </div>
+  	<div class="form-group">
+    <label for="inputloan" class="col-sm-2 control-label">Loan</label>
+    <div class="col-sm-10">
+		
+	
+		
+				<span class="text-danger"> 			
+		</span>
+	</div>
+  </div>
+	 <div class="form-group">
+
+    <div class="col-sm-offset-2 col-sm-10">
+     
+	         <button type="submit" value="registerbio" name="btn_savebio"  class="btn btn-success"> Save / Update data     </button>
+
+    </div>
+  </div>
+  
+                               </form>								
+							</div>
+						</div>
+				
+
+					
+			
+			</div>
+		</div>
+  
+  
+  
+		
+  
+  	</DIV>
+		</div>
+  
+   <div class="col-md-2">
+ 
+   <div class="panel panel-success" data-collapsed="0">
+        	<div class="panel-heading">
+            	<div class="panel-title"  id="redcolor">
+            		<i class="entypo-plus-circled"></i>
+				Guidelines
+            	</div>
+            </div>
+			<div class="panel-body">
+
+				 Fill these details:<br>
+				1. Personal Details<br>
+					2. Place of Birth Details<br>
+						3. Disability Details<br>
+				5.Click update/save.<br>
+			</div>
+		</div>
+  
+  </div>
+  
+  </div>
+
+   <div id="footer">
+	Copyright (c) 2021. All  rights reserved
+	</div>
+</div>
+
+</body>
+</html>
